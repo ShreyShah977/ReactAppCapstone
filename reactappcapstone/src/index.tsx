@@ -2,6 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 import Application from './application'
+// Modern theme
+import 'survey-react/modern.min.css';
+// Default theme
+// import 'survey-react/survey.min.css';
+import { StylesManager } from 'survey-react';
+
+StylesManager.applyTheme("modern");
+
 ReactDOM.render(
   <React.StrictMode>
     <Application/>
