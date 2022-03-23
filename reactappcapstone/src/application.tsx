@@ -12,7 +12,7 @@ const Application: React.FunctionComponent<IApplicationProps> = props  => {
             <Navbar color="primary" dark expand="md">
                 <Container>
                     <NavbarBrand>Covid Pre Screening Platform</NavbarBrand>
-                    <NavbarToggler onClick={()=>setNavbarOpen(!navbarOpen)}></NavbarToggler>
+                    <NavbarToggler onClick={()=>setNavbarOpen(s!navbarOpen)}></NavbarToggler>
                     <Collapse isOpen={navbarOpen} navbar>
                         <Nav className="me-auto" navbar>
                         
