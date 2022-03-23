@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Spinner } from 'reactstrap';
 import * as Survey from 'survey-react'
 
 export interface ISurveyProps {
@@ -10,8 +11,15 @@ export interface ISurveyProps {
 
 const SurveyComponent: React.FunctionComponent<ISurveyProps> = props => {
     const {css, data, json, onComplete} =  props;
+    const [loading, setLoading] = useState<boolean>(true)
+    useEffect(() => {
+      Survey.StylesManager.applyTheme("bootstrap");
+      
+      setLoading(false);
 
 
+    }, [])
+    if (loading) return <Spinner/>
 
     return (
         <Survey.Survey

@@ -108,7 +108,11 @@ const defaultSurveyJSON = {
      }
     ]
    };
-const defaultSurveyCSS = {};
+const defaultSurveyCSS = {
+    header: 'bg-primary text-white p-3',
+    body: 'bg-light',
+    completedPage: 'p-3'
+};
 const defaultSurveyDATA = {};
 
 
