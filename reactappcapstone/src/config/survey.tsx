@@ -37,7 +37,7 @@ const defaultSurveyJSON = {
         "type": "boolean",
         "name": "question5",
         "visibleIf": "{question4} = false",
-        "title": "Have you received the full mRNA immunizaion (With or without booster) dose more than 14 days ago?",
+        "title": "Have you received the full mRNA immunizaion (with or without the booster) dose within the last 14 days, or not at all?",
         "isRequired": true
        }
       ],

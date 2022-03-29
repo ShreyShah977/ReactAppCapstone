@@ -6,8 +6,11 @@ import defaultSurveyConfig from './config/survey';
 
 export interface IApplicationProps {}
 
+
+
 const Application: React.FunctionComponent<IApplicationProps> = props  => {
     const [navbarOpen, setNavbarOpen] = useState<boolean>(false);
+    
 
     return (
         <>
@@ -29,7 +32,7 @@ const Application: React.FunctionComponent<IApplicationProps> = props  => {
                             css = {defaultSurveyConfig.defaultSurveyCSS}
                             json = {defaultSurveyConfig.defaultSurveyJSON}
                             data = {defaultSurveyConfig.defaultSurveyDATA}
-                            onComplete = {(survey:any)=>{
+                            onComplete = {async (survey:any)=>{
                                 const payload = {
                                         questionArray:[] as string[],
                                         temperature:"",
@@ -37,22 +40,38 @@ const Application: React.FunctionComponent<IApplicationProps> = props  => {
                                         VaccineVerification:"",
                                         IDVerification:"" 
                                 }
-                                payload["temperature"] = survey.data['question6']
-                                payload["oxygen"] = survey.data['question7']
-                                payload["VaccineVerification"] = survey.data['question8']
-                                payload["IDVerification"] = survey.data['question9']
-                                for(let i = 1; i < 6; i++){
-                                    let q = survey.data["question"+String(i)]
-                                    payload.questionArray.push(q)
-                                }
-                                console.log(payload);
+                                if (survey.data["question9"] === 'Pass'){
+                                    payload["temperature"] = survey.data['question6']
+                                    payload["oxygen"] = survey.data['question7']
+                                    payload["VaccineVerification"] = survey.data['question8']
+                                    payload["IDVerification"] = survey.data['question9']
+                                    for(let i = 1; i < 6; i++){
+                                        let q = survey.data["question"+String(i)]
+                                        payload.questionArray.push(q)
+                                    }
+                                    console.log(payload);  
+                                    const response = await fetch("http://localhost:5000/add", {
+                                        method: "POST",
+                                        headers: {
+                                        'Content-Type' : 'application/json'
+                                        },
+                                        body: JSON.stringify(payload)
+                                        })
+                                        if (response.ok){
+                                         console.log("it worked")
+                                        }
+                                        else{
+                                            console.log("FAIL");
+                                        }
+                                    } 
+                                   
+                              
+                                
                                 
                                 /*
                                     Here we can calls to Flask Endpoint to send JSON
                                 
                                 */
-
-                                
                                 //window.location.reload();                               
                             }}
                             
