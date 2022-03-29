@@ -9,21 +9,21 @@ const defaultSurveyJSON = {
        {
         "type": "boolean",
         "name": "question1",
-        "title": "Have you travelled outside of Canada in the last 14 Days",
+        "title": "Have you travelled outside of Canada in the last 14 Days?",
         "isRequired": true
        },
        {
         "type": "boolean",
         "name": "question2",
         "visibleIf": "{question1} = false",
-        "title": "Have you or anyone in your household been tested positive for COVID-19?",
+        "title": "Have you or anyone in your household been tested positive for COVID-19 or are currently waiting for a COVID-19 test result?",
         "isRequired": true
        },
        {
         "type": "boolean",
         "name": "question3",
         "visibleIf": "{question2} = false",
-        "title": "Have you or anyone in your household had any of the following symptoms in the last 21 days: sore throat, cough, chills, body aches for unknown reasons, shortness of breath for unknown reasons, loss of smell, loss of taste, fever at or greater than 37 degrees C?",
+        "title": "Have you or anyone in your household had any of the following symptoms in the last 21 days: sore throat, cough, chills, body aches for unknown reasons, shortness of breath for unknown reasons, loss of smell, or loss of taste?",
         "isRequired": true
        },
        {
@@ -37,7 +37,7 @@ const defaultSurveyJSON = {
         "type": "boolean",
         "name": "question5",
         "visibleIf": "{question4} = false",
-        "title": "Have you received the final (or second) vaccination dose more than 14 days ago?",
+        "title": "Have you received the full mRNA immunizaion (With or without booster) dose more than 14 days ago?",
         "isRequired": true
        }
       ],
