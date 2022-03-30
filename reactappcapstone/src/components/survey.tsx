@@ -7,10 +7,11 @@ export interface ISurveyProps {
     json:any;
     data:any;
     onComplete: (survey: any) => void;
+    onValueChanged: (survey: any) => void;
 }
 
 const SurveyComponent: React.FunctionComponent<ISurveyProps> = props => {
-    const {css, data, json, onComplete} =  props;
+    const {css, data, json, onComplete, onValueChanged} =  props;
     const [loading, setLoading] = useState<boolean>(true)
     useEffect(() => {
       Survey.StylesManager.applyTheme("bootstrap");
@@ -20,14 +21,15 @@ const SurveyComponent: React.FunctionComponent<ISurveyProps> = props => {
 
     }, [])
     if (loading) return <Spinner/>
-
+    
     return (
         <Survey.Survey
             css={css}
             data={data}
             json={json}
             onComplete={onComplete}
-        
+            onValueChanged={onValueChanged}
+
         
         />
     );
