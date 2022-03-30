@@ -49,9 +49,10 @@ const defaultSurveyJSON = {
                 {
                     "type": "boolean",
                     "name": "tempCheck",
-                    "title": "Please slide toggle to \"Get Data\"  for Temperature Check fetch \n\ Then slide to reset to confirm answer",
+                    "visibleIf": "{question5} = false",
+                    "title": "Please slide toggle to \"Get Data\"  for Temperature Check. Then slide to DONE to move to the next question.",
                     "labelTrue": "GetData",
-                    "labelFalse": "Reset"
+                    "labelFalse": "Done"
                 },
                 {
                     "type": "text",
@@ -63,12 +64,21 @@ const defaultSurveyJSON = {
                     "readOnly": true
                 },
                 {
+                    "type": "boolean",
+                    "name": "oxyCheck",
+                    "visibleIf": "{question6} notempty",
+                    "title": "Please slide toggle to \"Get Data\"  for Oxygen (SpO2) Check. Then slide to DONE to move to the next question.",
+                    "labelTrue": "GetData",
+                    "labelFalse": "Done"
+                },
+                {
                     "type": "text",
                     "name": "question7",
                     "visibleIf": "{question6} notempty",
                     "title": "Please record your oxygen level at the device below",
                     "description": "See graphic for more information.",
-                    "isRequired": true
+                    "isRequired": true,
+                    "readOnly": true
                 }
             ],
             "visibleIf": "{question5} = false"
@@ -77,18 +87,36 @@ const defaultSurveyJSON = {
             "name": "page2",
             "elements": [
                 {
+                    "type": "boolean",
+                    "name": "checkQR",
+                    "visibleIf": "{question7} >= 90",
+                    "title": "Please slide toggle to \"Get QR\"  for QR Code Verification. Then slide to DONE to move to the next question.",
+                    "labelTrue": "GetQR",
+                    "labelFalse": "Done"
+                },
+                {
                     "type": "text",
                     "name": "question8",
                     "visibleIf": "{question7} >= 90",
                     "title": "Please present your vaccine passport or QR Code for verification as shown below",
-                    "isRequired": true
+                    "isRequired": true,
+                    "readOnly": true
+                },
+                {
+                    "type": "boolean",
+                    "name": "checkID",
+                    "visibleIf": "{question8} contains 'Pass'",
+                    "title": "Please slide toggle to \"Get QR\"  for ID OCR Verification. Then slide to DONE to move to the next question.",
+                    "labelTrue": "GetID",
+                    "labelFalse": "Done"
                 },
                 {
                     "type": "text",
                     "name": "question9",
                     "visibleIf": "{question8} contains 'Pass'",
                     "title": "Please present your ID for final verification",
-                    "isRequired": true
+                    "isRequired": true,
+                    "readOnly": true
                 }
             ]
         },

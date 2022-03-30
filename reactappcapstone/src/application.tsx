@@ -35,20 +35,101 @@ const Application: React.FunctionComponent<IApplicationProps> = props => {
                             onValueChanged={async (survey: any) => {
 
                                 if (survey.data["tempCheck"]) {
-                                    console.log("CHANGE DETECTED YO")
-                                    survey.setValue("question6", 34);
+                                    //console.log("CHANGE DETECTED YO")
+                                    //const response = await fetch("http://localhost:5000/getTemp")
+
+                                    // Basic GET Request to Flask Backend to grab the temperature value from the sensor
+                                    // Asynchronous so waits until Python finishes its execution
+                                    await fetch("http://localhost:5000/getTemp")
+                                        .then((response) => response.json())
+                                        .then((responseJson) => {
+                                            //console.log(responseJson['temp']);
+                                            survey.setValue("question6", responseJson["temp"]);
+                                        })
+                                        // General Error Catching
+                                        .catch((error) => {
+                                            console.error(error);
+
+                                        })
+                                }
+                                else if (survey.data["oxyCheck"]) {
+                                    //console.log("CHANGE DETECTED YO")
+                                    //const response = await fetch("http://localhost:5000/getTemp")
+
+                                    // Basic GET Request to Flask Backend to grab the Oxygen value from the SpO2 sensor
+                                    // Asynchronous so waits until Python finishes its execution
+                                    await fetch("http://localhost:5000/getOxy")
+                                        .then((response) => response.json())
+                                        .then((responseJson) => {
+                                            //console.log(responseJson['oxy']);
+                                            survey.setValue("question7", responseJson["oxy"]);
+                                        })
+                                        // General Error Catching
+                                        .catch((error) => {
+                                            console.error(error);
+
+                                        })
+                                }
+                                else if (survey.data["checkQR"]) {
+
+
+                                    // Basic GET Request to Flask Backend to grab the QR value after validation in Python Backend
+                                    // Asynchronous so waits until Python finishes its execution
+                                    await fetch("http://localhost:5000/getQR")
+                                        .then((response) => response.json())
+                                        .then((responseJson) => {
+
+                                            survey.setValue("question8", responseJson["validQR"]);
+                                        })
+                                        // General Error Catching
+                                        .catch((error) => {
+                                            console.error(error);
+
+                                        })
+                                }
+                                else if (survey.data["checkID"]) {
+
+
+                                    // Basic GET Request to Flask Backend to grab the QR value after validation in Python Backend
+                                    // Asynchronous so waits until Python finishes its execution
+                                    await fetch("http://localhost:5000/getID")
+                                        .then((response) => response.json())
+                                        .then((responseJson) => {
+
+                                            survey.setValue("question9", responseJson["validID"]);
+                                        })
+                                        // General Error Catching
+                                        .catch((error) => {
+                                            console.error(error);
+
+                                        })
                                 }
 
                             }}
+                            // onComplete occurs when survey finshes all subrountines as expected
+                            // With answers to various sections matching expected 
                             onComplete={async (survey: any) => {
+                                
+                                // Prepopulate expected array
                                 const payload = {
                                     questionArray: [] as string[],
                                     temperature: "",
                                     oxygen: "",
                                     VaccineVerification: "",
-                                    IDVerification: ""
+                                    IDVerification: "",
+                                    timeStamp: ''
                                 }
+                                // Checking if the last question (FaceID Check) passed optimally
                                 if (survey.data["question9"] === 'Pass') {
+                                    // 
+                                    var getTime = Date.now();
+                                    var date = new Date(getTime)
+                                    payload["timeStamp"] = (date.getDate() +
+                                        "/" + (date.getMonth() + 1) +
+                                        "/" + date.getFullYear() +
+                                        "  , " + date.getHours() +
+                                        ":" + date.getMinutes() +
+                                        ":" + date.getSeconds());
                                     payload["temperature"] = survey.data['question6']
                                     payload["oxygen"] = survey.data['question7']
                                     payload["VaccineVerification"] = survey.data['question8']
@@ -77,7 +158,7 @@ const Application: React.FunctionComponent<IApplicationProps> = props => {
                                     Here we can calls to Flask Endpoint to send JSON
                                 
                                 */
-                                //window.location.reload();                               
+                                window.location.reload();                               
                             }}
 
 
