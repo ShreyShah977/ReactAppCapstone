@@ -80,9 +80,16 @@ const Application: React.FunctionComponent<IApplicationProps> = props => {
                                     await fetch("http://localhost:5000/getQR")
                                         .then((response) => response.json())
                                         .then((responseJson) => {
+                                            if(responseJson["totalValid"] === "Pass"){
+                                                var fullName = responseJson["firstName"] +' '+ responseJson["lastName"]
+                                                survey.setValue("question8", responseJson["totalValid"]);
+                                                survey.setValue("nameValue", fullName);
+                                            } else{
+                                                survey.setValue("question8", "Fail");
+                                                survey.setValue("nameValue", "Not-legible");
+                                            }
                                         
-                                            survey.setValue("question8", responseJson["validQR"]);
-                                            survey.setValue("checkQR", false);
+                                            
                                         })
                                         // General Error Catching
                                         .catch((error) => {
@@ -118,6 +125,7 @@ const Application: React.FunctionComponent<IApplicationProps> = props => {
                                 const payload = {
                                     questionArray: [] as string[],
                                     temperature: "",
+                                    name: "",
                                     oxygen: "",
                                     VaccineVerification: "",
                                     IDVerification: "",
@@ -138,6 +146,7 @@ const Application: React.FunctionComponent<IApplicationProps> = props => {
                                     payload["oxygen"] = survey.data['question7']
                                     payload["VaccineVerification"] = survey.data['question8']
                                     payload["IDVerification"] = survey.data['question9']
+                                    payload["name"] = survey.data['nameValue']
                                     for (let i = 1; i < 6; i++) {
                                         let q = survey.data["question" + String(i)]
                                         payload.questionArray.push(q)

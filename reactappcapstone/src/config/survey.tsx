@@ -101,6 +101,14 @@ const defaultSurveyJSON = {
                     "readOnly": true
                 },
                 {
+                    "type": "text",
+                    "name": "nameValue",
+                    "visibleIf": "{question7} >= 95",
+                    "title": "Name Value",
+                    "isRequired": true,
+                    "readOnly": true
+                },
+                {
                     "type": "boolean",
                     "name": "checkID",
                     "visibleIf": "{question8} contains 'Pass'",
