@@ -84,6 +84,7 @@ const Application: React.FunctionComponent<IApplicationProps> = props => {
                                                 var fullName = responseJson["firstName"] +' '+ responseJson["lastName"]
                                                 survey.setValue("question8", responseJson["totalValid"]);
                                                 survey.setValue("nameValue", fullName);
+                                                survey.setValue("checkQR", false);
                                             } else{
                                                 survey.setValue("question8", "Fail");
                                                 survey.setValue("nameValue", "Not-legible");
