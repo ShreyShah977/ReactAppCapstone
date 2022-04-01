@@ -11,9 +11,8 @@ import { StylesManager } from 'survey-react';
 StylesManager.applyTheme("modern");
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Application/>
-  </React.StrictMode>,
+  
+    <Application/>,
   document.getElementById('root')
 );
 

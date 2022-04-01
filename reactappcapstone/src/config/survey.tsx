@@ -59,7 +59,6 @@ const defaultSurveyJSON = {
                     "name": "question6",
                     "visibleIf": "{question5} = false",
                     "title": "Please record your temperature at the device below.",
-                    "description": "See graphic for more information.",
                     "isRequired": true,
                     "readOnly": true
                 },
@@ -76,7 +75,6 @@ const defaultSurveyJSON = {
                     "name": "question7",
                     "visibleIf": "{question6} notempty",
                     "title": "Please record your oxygen level at the device below",
-                    "description": "See graphic for more information.",
                     "isRequired": true,
                     "readOnly": true
                 }
@@ -89,7 +87,7 @@ const defaultSurveyJSON = {
                 {
                     "type": "boolean",
                     "name": "checkQR",
-                    "visibleIf": "{question7} >= 90",
+                    "visibleIf": "{question7} >= 95",
                     "title": "Please slide toggle to \"Get QR\"  for QR Code Verification. Then slide to DONE to move to the next question.",
                     "labelTrue": "GetQR",
                     "labelFalse": "Done"
@@ -97,7 +95,7 @@ const defaultSurveyJSON = {
                 {
                     "type": "text",
                     "name": "question8",
-                    "visibleIf": "{question7} >= 90",
+                    "visibleIf": "{question7} >= 95",
                     "title": "Please present your vaccine passport or QR Code for verification as shown below",
                     "isRequired": true,
                     "readOnly": true

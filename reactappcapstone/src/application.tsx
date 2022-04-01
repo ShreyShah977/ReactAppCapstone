@@ -33,7 +33,7 @@ const Application: React.FunctionComponent<IApplicationProps> = props => {
                             json={defaultSurveyConfig.defaultSurveyJSON}
                             data={defaultSurveyConfig.defaultSurveyDATA}
                             onValueChanged={async (survey: any) => {
-
+                                
                                 if (survey.data["tempCheck"]) {
                                     //console.log("CHANGE DETECTED YO")
                                     //const response = await fetch("http://localhost:5000/getTemp")
@@ -45,6 +45,7 @@ const Application: React.FunctionComponent<IApplicationProps> = props => {
                                         .then((responseJson) => {
                                             //console.log(responseJson['temp']);
                                             survey.setValue("question6", responseJson["temp"]);
+                                            survey.setValue("tempCheck", false);
                                         })
                                         // General Error Catching
                                         .catch((error) => {
@@ -63,6 +64,7 @@ const Application: React.FunctionComponent<IApplicationProps> = props => {
                                         .then((responseJson) => {
                                             //console.log(responseJson['oxy']);
                                             survey.setValue("question7", responseJson["oxy"]);
+                                            survey.setValue("oxyCheck", false);
                                         })
                                         // General Error Catching
                                         .catch((error) => {
@@ -72,14 +74,15 @@ const Application: React.FunctionComponent<IApplicationProps> = props => {
                                 }
                                 else if (survey.data["checkQR"]) {
 
-
+                                   
                                     // Basic GET Request to Flask Backend to grab the QR value after validation in Python Backend
                                     // Asynchronous so waits until Python finishes its execution
                                     await fetch("http://localhost:5000/getQR")
                                         .then((response) => response.json())
                                         .then((responseJson) => {
-
+                                        
                                             survey.setValue("question8", responseJson["validQR"]);
+                                            survey.setValue("checkQR", false);
                                         })
                                         // General Error Catching
                                         .catch((error) => {
@@ -97,6 +100,7 @@ const Application: React.FunctionComponent<IApplicationProps> = props => {
                                         .then((responseJson) => {
 
                                             survey.setValue("question9", responseJson["validID"]);
+                                            survey.setValue("checkID", false);
                                         })
                                         // General Error Catching
                                         .catch((error) => {
@@ -148,17 +152,19 @@ const Application: React.FunctionComponent<IApplicationProps> = props => {
                                     })
                                     if (response.ok) {
                                         console.log("it worked")
+                                       
                                     }
                                     else {
                                         console.log("FAIL");
                                     }
                                 }
-
+                                   
                                 /*
                                     Here we can calls to Flask Endpoint to send JSON
                                 
                                 */
-                                window.location.reload();                               
+                                window.location.reload();  
+                    
                             }}
 
 
