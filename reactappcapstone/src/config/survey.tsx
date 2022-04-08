@@ -112,7 +112,7 @@ const defaultSurveyJSON = {
                     "type": "boolean",
                     "name": "checkID",
                     "visibleIf": "{question8} contains 'Pass'",
-                    "title": "Please slide toggle to \"Get QR\"  for ID OCR Verification. Then slide to DONE to move to the next question.",
+                    "title": "Please slide toggle to \"Get ID\"  for ID OCR Verification. Then slide to DONE to move to the next question.",
                     "labelTrue": "GetID",
                     "labelFalse": "Done"
                 },
