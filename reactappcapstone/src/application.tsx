@@ -88,6 +88,7 @@ const Application: React.FunctionComponent<IApplicationProps> = props => {
                                             } else{
                                                 survey.setValue("question8", "Fail");
                                                 survey.setValue("nameValue", "Not-legible");
+                                                survey.setValue("checkQR", false);
                                             }
                                         
                                             
